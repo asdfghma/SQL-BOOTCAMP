@@ -1,0 +1,43 @@
+a. Belirli Kolonları Seçme
+Çalışanların sadece FirstName, LastName ve Salary bilgilerini getiren bir SQL sorgusu yazınız.
+
+Sadece isimleri getiren sorgu:
+select FirstName
+from employees
+
+Sadece soyisimleri getiren sorgu:
+select LastName
+from employees
+
+Sadece maaşları getiren sorgu:
+select Salary
+from employees
+
+b. DISTINCT Komutu ile Tekrarları Önleme
+Çalışanların çalıştıkları departmanları benzersiz olarak listeleyen bir SQL sorgusu yazınız
+
+Çalışanların departman id ve isimlerine getiren sorgu:
+select distinct departmentid, FirstName
+from employees
+
+c. Belirli Bir Departmana Ait Çalışanları Listeleme
+Sadece IT departmanında çalışanların bilgilerini getiren bir SQL sorgusu yazınız.
+
+Sadece id'leri 1 olan çalışanları getiren sorgu:
+select * from employees
+where departmentid=1;
+
+d. Maaşa Göre Sıralama
+Çalışanları maaşlarına göre büyükten küçüğe sıralayan bir SQL sorgusu yazınız.
+
+Çalışanların maaşlarını büyükten küçüğe sıralayan sorgu:
+select Salary
+from employees
+order by 1 desc
+
+e. Kolonları Birleştirme (Concatenation)
+Çalışanların FirstName ve LastName alanlarını birleştirerek, tam adlarını içeren yeni bir kolon oluşturan bir SQL sorgusu yazınız.
+
+Çalışanların isim ve soyadlarını FullName adlı kolonda birleştiren sorgu:
+select FirstName || '-' || LastName as FullName
+from employees
