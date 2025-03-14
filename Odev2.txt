@@ -1,0 +1,34 @@
+1.Invoice tablosunda, tüm değerleri NULL olan kayıtların sayısını bulmanız isteniyor. Bu işlemi tek bir sorgu ile yapmalısınız. Sorguyu yazdıktan sonra, PostgreSQL’in sol alt kısmındaki Row sayısını, SQL sorgunuzda yorum satırında belirtmeniz gerekmektedir.
+
+Cevap:
+SELECT COUNT(*) 
+FROM Invoice
+WHERE 
+  billing_state IS NULL AND 
+  billingpostal_code IS NULL;
+--Total rows 1 
+
+
+2.
+Koordinasyondaki kişiler, Total değerlerinde bir hata olduğunu belirtiyorlar. Bu değerlerin iki katını görmek ve eski versiyonlarıyla birlikte karşılaştırmak için bir sorgu yazmanız isteniyor. Ayrıca, verilerin daha rahat takip edilebilmesi için, tablonun yeni versiyonuna ait kolona göre büyükten küçüğe sıralama yapılması isteniyor.
+
+
+SELECT 
+    invoice_id,         
+    Total AS OldTotal,  -- Eski Total değeri
+    Total * 2 AS NewTotal, -- Total değerinin iki katı
+    newversioncolumn    -- Yeni versiyonla ilgili kolon
+FROM Invoice
+ORDER BY newversioncolumn DESC;  -- Yeni versiyona göre büyükten küçüğe sıralama
+
+
+
+3.
+Adres kolonundaki verileri, soldan 3 karakter ve sağdan 4 karakter alarak birleştirmeniz ve "Açık Adres" olarak yazmanız isteniyor. Ayrıca, bu yeni açık adresi 2013 yılı ve 8. ay’a göre filtrelemeniz gerekiyor.
+
+
+SELECT 
+    CONCAT(LEFT(billing_address, 3), RIGHT(billing_address, 4)) AS "Açık Adres"
+FROM Invoice
+WHERE EXTRACT(YEAR FROM invoice_date) = 2013
+  AND EXTRACT(MONTH FROM invoice_date) = 8;
