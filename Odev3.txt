@@ -1,0 +1,42 @@
+
+Soru: “USA” ülkesine ait, 2009 yılı içerisinde oluşturulmuş tüm faturaların (Invoice) toplamını listeleyen bir sorgu yazınız.
+
+select SUM(total) as toplam
+from invoice
+where billing_country = 'USA' and
+invoice_date between '2009-01-01' and '2009-12-31';
+
+SUM: Toplam miktarı alıyoruz.
+WHERE: Hangi ülke ve hangi tarihler arasında olduğunu belirtiyoruz.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Soru: Tüm parça (track) bilgilerini, bu parçaların ait olduğu playlisttrack ve playlist tablolarıyla birleştirerek (JOIN) listeleyen bir sorgu yazınız.
+
+SELECT t.*, p.playlist_id
+FROM track t
+JOIN playlisttrack pt ON t.track_id = pt.track_id
+JOIN playlist p ON pt.playlist_id = p.playlist_id;
+
+JOIN: track ve playlisttrack tablolarını track_id ile playlist ve playlisttruck tablolarını playlist_id üzerinden birleştiriyoruz.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Soru: "Let There Be Rock" adlı albüme ait tüm parçaları (Track) listeleyen, sanatçı (Artist) bilgisini de içeren bir sorgu yazınız. Ayrıca, sonuçları parça süresi (milliseconds) büyükten küçüğe sıralayınız.
+
+SELECT t.name AS track, a.title AS album, ar.name AS artist, t.milliseconds AS duration
+FROM track t
+JOIN album a ON t.album_Id = a.album_Id
+JOIN artist ar ON a.artist_Id = ar.artist_Id
+WHERE a.title = 'Let There Be Rock'
+ORDER BY t.milliseconds DESC;
+
+JOIN: track, album ve artist tablolarını doğru şekilde birleştiriyoruz. track tablosunu album tablosu ile album_id üzerinden, album tablosunu ise artist tablosu ile artist_Id üzerinden birleştiriyoruz.
+
+WHERE: Albüm başlığının "Let There Be Rock" olduğunu belirtiyoruz.
+
+ORDER BY: Sonuçları parçaların sürelerini (t.Milliseconds) büyükten küçüğe sıralıyoruz.
